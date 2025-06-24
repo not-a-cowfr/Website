@@ -1,5 +1,3 @@
-import { Crop } from "farming-weight";
-
 export const PROPER_CROP_TO_IMG: Partial<Record<string, string>> = {
 	Cactus: '/images/crops/cactus.png',
 	Carrot: '/images/crops/carrot.png',

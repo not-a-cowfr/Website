@@ -76,8 +76,7 @@
 		setTimeout(() => updateSelectedTool(c), 0);
 	}
 
-	const cropKey = (crop: string) =>
-		(CROP_ID_TO_CROP[crop as keyof typeof CROP_ID_TO_CROP] ?? getCropFromName(crop)) as Crop;
+	const cropKey = (crop: string) => getCropFromName(crop) as Crop;
 
 	const blocksActuallyBroken = $derived(blocksBroken * (bps / 20));
 
