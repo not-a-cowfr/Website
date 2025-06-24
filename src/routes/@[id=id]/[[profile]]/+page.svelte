@@ -3,8 +3,7 @@
 	import { getStatsContext } from '$lib/stores/stats.svelte';
 	import { DEFAULT_SKILL_CAPS } from '$lib/constants/levels';
 	import { getLevelProgress } from '$lib/format';
-	import { CROP_UNICODE_EMOJIS } from '$lib/constants/crops';
-	import { Crop, getCropDisplayName, getCropFromName } from 'farming-weight';
+	import { Crop, CROP_UNICODE_EMOJIS, getCropDisplayName, getCropFromName } from 'farming-weight';
 	import Skills from '$comp/stats/skills.svelte';
 	import Collections from '$comp/stats/collections.svelte';
 	import APIstatus from '$comp/stats/apistatus.svelte';

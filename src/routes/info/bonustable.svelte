@@ -5,7 +5,7 @@
 		MAX_MEDAL_BONUS,
 		MINION_REWARD_AT_TIER,
 		MINION_REWARD_WEIGHT,
-	} from '$lib/constants/weights';
+	} from 'farming-weight';
 </script>
 
 <div class="scrollbar-none flex w-full overflow-x-auto">

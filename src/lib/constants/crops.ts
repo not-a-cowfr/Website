@@ -37,17 +37,3 @@ export const CROP_TO_HEX: Partial<Record<string, string>> = {
 	'Sugar Cane': '#82a859',
 	Wheat: '#d5da45',
 };
-
-export const CROP_UNICODE_EMOJIS: Record<Crop, string> = {
-	[Crop.Wheat]: '🌾',
-	[Crop.Carrot]: '🥕',
-	[Crop.Potato]: '🥔',
-	[Crop.Pumpkin]: '🎃',
-	[Crop.Melon]: '🍈',
-	[Crop.Mushroom]: '🍄',
-	[Crop.CocoaBeans]: '🍫',
-	[Crop.Cactus]: '🌵',
-	[Crop.SugarCane]: '🎋',
-	[Crop.NetherWart]: '🌹',
-	[Crop.Seeds]: '🌱',
-} as const;
