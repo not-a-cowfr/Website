@@ -1,69 +1,4 @@
-import { Crop } from 'farming-weight';
-
-export const PROPER_CROP_NAME: Partial<Record<string, string>> = {
-	CACTUS: 'Cactus',
-	CARROT_ITEM: 'Carrot',
-	'INK_SACK:3': 'Cocoa Beans',
-	MELON: 'Melon',
-	MUSHROOM_COLLECTION: 'Mushroom',
-	NETHER_STALK: 'Nether Wart',
-	POTATO_ITEM: 'Potato',
-	PUMPKIN: 'Pumpkin',
-	SUGAR_CANE: 'Sugar Cane',
-	WHEAT: 'Wheat',
-	cactus: 'Cactus',
-	carrot: 'Carrot',
-	cocoa: 'Cocoa Beans',
-	melon: 'Melon',
-	mushroom: 'Mushroom',
-	netherwart: 'Nether Wart',
-	wart: 'Nether Wart',
-	potato: 'Potato',
-	pumpkin: 'Pumpkin',
-	sugarcane: 'Sugar Cane',
-	cane: 'Sugar Cane',
-	wheat: 'Wheat',
-};
-
-export const API_CROP_TO_CROP: Record<string, string> = {
-	WHEAT: 'wheat',
-	POTATO_ITEM: 'potato',
-	CARROT_ITEM: 'carrot',
-	MELON: 'melon',
-	PUMPKIN: 'pumpkin',
-	CACTUS: 'cactus',
-	SUGAR_CANE: 'sugarcane',
-	INK_SACK: 'cocoa',
-	'INK_SACK:3': 'cocoa',
-	MUSHROOM_COLLECTION: 'mushroom',
-	NETHER_STALK: 'netherwart',
-};
-
-export const PROPER_CROP_TO_API_CROP: Record<string, string> = {
-	Cactus: 'CACTUS',
-	Carrot: 'CARROT_ITEM',
-	'Cocoa Beans': 'INK_SACK:3',
-	Melon: 'MELON',
-	Mushroom: 'MUSHROOM_COLLECTION',
-	'Nether Wart': 'NETHER_STALK',
-	Potato: 'POTATO_ITEM',
-	Pumpkin: 'PUMPKIN',
-	'Sugar Cane': 'SUGAR_CANE',
-	Wheat: 'WHEAT',
-};
-
-export const PROPER_CROP_TO_MINION: Partial<Record<string, string>> = {
-	Cactus: 'CACTUS',
-	Carrot: 'CARROT',
-	'Cocoa Beans': 'COCOA',
-	Melon: 'MELON',
-	Mushroom: 'MUSHROOM',
-	'Nether Wart': 'NETHER_WARTS',
-	Potato: 'POTATO',
-	Pumpkin: 'PUMPKIN',
-	'Sugar Cane': 'SUGAR_CANE',
-	Wheat: 'WHEAT',
-};
+import { Crop } from "farming-weight";
 
 export const PROPER_CROP_TO_IMG: Partial<Record<string, string>> = {
 	Cactus: '/images/crops/cactus.png',
@@ -76,34 +11,6 @@ export const PROPER_CROP_TO_IMG: Partial<Record<string, string>> = {
 	Pumpkin: '/images/crops/pumpkin.png',
 	'Sugar Cane': '/images/crops/sugarcane.png',
 	Wheat: '/images/crops/wheat.png',
-};
-
-export const ELITE_CROP_TO_CROP: Record<string, Crop> = {
-	Cactus: Crop.Cactus,
-	Carrot: Crop.Carrot,
-	CocoaBeans: Crop.CocoaBeans,
-	Melon: Crop.Melon,
-	Mushroom: Crop.Mushroom,
-	NetherWart: Crop.NetherWart,
-	Potato: Crop.Potato,
-	Pumpkin: Crop.Pumpkin,
-	SugarCane: Crop.SugarCane,
-	Wheat: Crop.Wheat,
-	Seeds: Crop.Seeds,
-};
-
-export const CROP_TO_ELITE_CROP: Record<Crop, string> = {
-	[Crop.Cactus]: 'Cactus',
-	[Crop.Carrot]: 'Carrot',
-	[Crop.CocoaBeans]: 'CocoaBeans',
-	[Crop.Melon]: 'Melon',
-	[Crop.Mushroom]: 'Mushroom',
-	[Crop.NetherWart]: 'NetherWart',
-	[Crop.Potato]: 'Potato',
-	[Crop.Pumpkin]: 'Pumpkin',
-	[Crop.SugarCane]: 'SugarCane',
-	[Crop.Wheat]: 'Wheat',
-	[Crop.Seeds]: 'Seeds',
 };
 
 export const CROP_TO_HEX: Partial<Record<string, string>> = {
@@ -144,20 +51,3 @@ export const CROP_UNICODE_EMOJIS: Record<Crop, string> = {
 	[Crop.NetherWart]: '🌹',
 	[Crop.Seeds]: '🌱',
 } as const;
-
-export const PROPER_CROP_NAMES = Object.keys(PROPER_CROP_TO_MINION);
-
-export const CROP_UPGRADE_COSTS: Record<number, number> = {
-	0: 0,
-	1: 5,
-	2: 10,
-	3: 20,
-	4: 50,
-	5: 100,
-	6: 500,
-	7: 1_000,
-	8: 2_000,
-	9: 4_000,
-};
-
-export const CROP_UPGRADES_MAX_COST = 10 * Object.values(CROP_UPGRADE_COSTS).reduce((a, b) => a + b, 0);
