@@ -2,7 +2,7 @@
 	import Head from '$comp/head.svelte';
 	import Milestones from '$comp/stats/garden/milestones.svelte';
 	import Skillbar from '$comp/stats/skillbar.svelte';
-	import { Crop, GARDEN_VISITORS, getCropDisplayName, getCropUpgrades, getGardenLevel } from 'farming-weight';
+	import { Crop, CROP_UPGRADES_MAX_COST, GARDEN_VISITORS, getCopperSpentCropUpgrade, getCropDisplayName, getCropUpgrades, getGardenLevel } from 'farming-weight';
 	import type { components } from '$lib/api/api';
 	import Plots from '$comp/stats/garden/plots.svelte';
 	import CropUpgrades from '$comp/stats/garden/crop-upgrades.svelte';
@@ -11,8 +11,7 @@
 	import { page } from '$app/state';
 	import { getStatsContext } from '$lib/stores/stats.svelte';
 	import * as Popover from '$ui/popover';
-	import { CROP_UPGRADES_MAX_COST, PROPER_CROP_TO_IMG } from '$lib/constants/crops';
-	import { getCopperSpent } from '$lib/calc/garden';
+	import { PROPER_CROP_TO_IMG } from '$lib/constants/crops';
 
 	let overflow = $state(true);
 
@@ -42,7 +41,7 @@
 			.sort((a, b) => a.name.localeCompare(b.name))
 	);
 
-	let totalCopperSpent = $derived.by(() => crops.reduce((sum, { level }) => sum + getCopperSpent(level), 0));
+	let totalCopperSpent = $derived.by(() => crops.reduce((sum, { level }) => sum + getCopperSpentCropUpgrade(level), 0));
 </script>
 
 <Head title="{ctx.ignMeta} | Garden" description="See this player's garden stats in Hypixel Skyblock!" />
