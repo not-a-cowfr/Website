@@ -124,10 +124,10 @@ export class PlayerStats {
 
 	static parseCollections(member: NonNullable<components['schemas']['ProfileMemberDto']>) {
 		const collections = Object.entries(member.collections ?? {})
-			.filter(([key]) => getProperCropFromCrop(getCropFromName(key) ?? Crop.Wheat))
+			.filter(([key]) => getProperCropFromCrop(getCropFromName(key)!))
 			.map(([key, value]) => ({
 				key: CROP_ID_TO_CROP[key as keyof typeof CROP_ID_TO_CROP],
-				name: getProperCropFromCrop(getCropFromName(key) ?? Crop.Wheat),
+				name: getProperCropFromCrop(getCropFromName(key)!),
 				value: value,
 				minionTierField: 0,
 				weight: 0,
