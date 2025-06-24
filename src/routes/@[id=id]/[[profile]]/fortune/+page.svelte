@@ -16,8 +16,10 @@
 		getCropUpgrades,
 		getCropInfo,
 		createFarmingWeightCalculator,
+		CROP_ID_TO_CROP,
+		getProperCropFromCrop,
 	} from 'farming-weight';
-	import { PROPER_CROP_NAME, PROPER_CROP_TO_API_CROP, PROPER_CROP_TO_IMG } from '$lib/constants/crops';
+	import { PROPER_CROP_TO_IMG } from '$lib/constants/crops';
 	import { DEFAULT_SKILL_CAPS } from '$lib/constants/levels';
 	import { getSelectedCrops } from '$lib/stores/selectedCrops';
 	import { getRatesData } from '$lib/stores/ratesData';
@@ -75,7 +77,7 @@
 	}
 
 	const cropKey = (crop: string) =>
-		(PROPER_CROP_TO_API_CROP[crop as keyof typeof PROPER_CROP_TO_API_CROP] ?? getCropFromName(crop)) as Crop;
+		(CROP_ID_TO_CROP[crop as keyof typeof CROP_ID_TO_CROP] ?? getCropFromName(crop)) as Crop;
 
 	const blocksActuallyBroken = $derived(blocksBroken * (bps / 20));
 
@@ -194,7 +196,7 @@
 	const calculator = $derived(calculateDetailedAverageDrops(calculatorOptions));
 
 	const selected = $derived(
-		Object.entries(calculator).find(([cropId]) => $selectedCrops[PROPER_CROP_NAME[cropId] ?? ''])
+		Object.entries(calculator).find(([cropId]) => $selectedCrops[getProperCropFromCrop(getCropFromName(cropId) ?? Crop.Wheat) ?? ''])
 	);
 
 	const weightGain = $derived.by(() => {
@@ -360,7 +362,7 @@
 								class="pixelated h-8 w-8"
 							/>
 
-							<h2 class="flex-2 pb-1 text-2xl">{PROPER_CROP_NAME[cropId]} Rates</h2>
+							<h2 class="flex-2 pb-1 text-2xl">{getProperCropFromCrop(getCropFromName(cropId) ?? Crop.Wheat)} Rates</h2>
 						</div>
 						<div class="flex w-full flex-col gap-2 sm:flex-row sm:items-center">
 							<div class="flex flex-1 flex-col justify-start gap-1">
