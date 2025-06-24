@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { PROPER_CROP_NAME } from '$lib/constants/crops';
 	import type { RatesPlayerStore } from '$lib/stores/ratesPlayer.svelte';
 	import { getSelectedCrops } from '$lib/stores/selectedCrops';
-	import type { FarmingTool } from 'farming-weight';
+	import { getProperCropFromCrop, type FarmingTool } from 'farming-weight';
 	import Toolconfig from './toolconfig.svelte';
 
 	function toggleShow() {
@@ -22,14 +21,14 @@
 	let tools = $derived(toolList ?? $player.tools);
 
 	let filtered = $derived(
-		tools.filter((tool) => tool.crop && $selectedCrops[PROPER_CROP_NAME[tool.crop] ?? '']).slice(0, show)
+		tools.filter((tool) => tool.crop && $selectedCrops[getProperCropFromCrop(tool.crop) ?? '']).slice(0, show)
 	);
 </script>
 
 <div class="-mx-2 mb-2 flex w-full flex-col gap-2">
 	{#each filtered as tool (tool.item.uuid)}
 		{@const selected = selectedToolId === tool.item.uuid}
-		{#if tool.crop && $selectedCrops[PROPER_CROP_NAME[tool.crop] ?? '']}
+		{#if tool.crop && $selectedCrops[getProperCropFromCrop(tool.crop) ?? '']}
 			<button
 				onclick={() => {
 					selectedToolId = tool.item.uuid ?? undefined;
@@ -44,7 +43,7 @@
 			</button>
 		{/if}
 	{/each}
-	{#if $player.tools.filter((tool) => tool.crop && $selectedCrops[PROPER_CROP_NAME[tool.crop] ?? '']).length > 2}
+	{#if $player.tools.filter((tool) => tool.crop && $selectedCrops[getProperCropFromCrop(tool.crop) ?? '']).length > 2}
 		<button
 			onclick={toggleShow}
 			class="hover:bg-card/50 flex w-fit cursor-pointer items-center justify-center rounded-lg border-[3px] border-solid border-transparent px-1 py-0.5 text-sm"
@@ -53,7 +52,7 @@
 		</button>
 	{/if}
 
-	{#if !$player.tools.some((tool) => tool.crop && $selectedCrops[PROPER_CROP_NAME[tool.crop] ?? ''])}
+	{#if !$player.tools.some((tool) => tool.crop && $selectedCrops[getProperCropFromCrop(tool.crop) ?? ''])}
 		<p class="my-4 text-center text-lg font-semibold">No matching tools found!</p>
 	{/if}
 </div>

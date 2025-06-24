@@ -1,10 +1,11 @@
 <script lang="ts">
 	import type { components } from '$lib/api/api';
-	import { CROP_TO_HEX, PROPER_CROP_NAME } from '$lib/constants/crops';
+	import { CROP_TO_HEX } from '$lib/constants/crops';
 	import { toReadable } from '$lib/format';
 	import { getAnyCropSelected, getSelectedCrops } from '$lib/stores/selectedCrops';
 	import type { ApexOptions } from 'apexcharts';
 	import Apex from './apex.svelte';
+	import { Crop, getCropFromName, getProperCropFromCrop } from 'farming-weight';
 
 	interface Props {
 		points: components['schemas']['CropCollectionsDataPointDto'][];
@@ -22,7 +23,7 @@
 				name !== 'seeds' &&
 				(!$anyCropSelected ||
 					$selectedCrops[
-						PROPER_CROP_NAME[name as keyof typeof PROPER_CROP_NAME] as keyof typeof selectedCrops
+						getProperCropFromCrop(getCropFromName(name) ?? Crop.Wheat) as keyof typeof selectedCrops
 					])
 		)
 	);

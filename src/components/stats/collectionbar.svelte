@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import * as Popover from '$comp/ui/popover';
-	import { PROPER_CROP_NAMES } from '$lib/constants/crops';
 	import * as Sidebar from '$ui/sidebar';
+	import { CROP_TO_PROPER_CROP } from 'farming-weight';
 	import Minion from './minion.svelte';
 
 	interface Props {
@@ -31,7 +31,7 @@
 		rank = -1,
 	}: Props = $props();
 
-	const cropArray = PROPER_CROP_NAMES.sort((a, b) => a?.localeCompare(b ?? '') ?? 0);
+	const cropArray = Object.values(CROP_TO_PROPER_CROP).sort((a, b) => a?.localeCompare(b ?? '') ?? 0);
 
 	let crop = $derived(name ? name : undefined);
 	let index = $derived(name && crop ? cropArray.indexOf(name) : -1);

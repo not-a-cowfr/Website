@@ -3,8 +3,7 @@
 	import CropSelector from '$comp/stats/contests/crop-selector.svelte';
 	import { getSelectedCrops } from '$lib/stores/selectedCrops';
 	import CropMedalCounts from '$comp/stats/jacob/crop-medal-counts.svelte';
-	import { CROP_TO_ELITE_CROP } from '$lib/constants/crops';
-	import { Crop, getCropFromName, calcWeightForCrop } from 'farming-weight';
+	import { Crop, getCropFromName, calcWeightForCrop, getEliteCropFromCrop } from 'farming-weight';
 	import ContestList from '$comp/stats/jacob/contest-list.svelte';
 	import * as Select from '$ui/select';
 	import { getStatsContext } from '$lib/stores/stats.svelte';
@@ -66,7 +65,7 @@
 	const MEDAL_TYPES = ['diamond', 'platinum', 'gold', 'silver', 'bronze'] as const;
 
 	const allCropStats = $derived((crop: string) => {
-		const cropKey = CROP_TO_ELITE_CROP[getCropFromName(crop) ?? Crop.Wheat] as keyof CropStats;
+		const cropKey = getEliteCropFromCrop(getCropFromName(crop) ?? Crop.Wheat) as keyof CropStats;
 		return (
 			jacob?.stats?.crops?.[cropKey] ??
 			({

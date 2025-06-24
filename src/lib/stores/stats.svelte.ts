@@ -1,9 +1,7 @@
 import type { components } from '$lib/api/api';
 import type { ProfileDetails } from '$lib/api/elite';
-import { PROPER_CROP_NAME, API_CROP_TO_CROP, PROPER_CROP_TO_MINION } from '$lib/constants/crops';
-import { CROP_TO_PEST } from '$lib/constants/pests';
 import { formatIgn, getRankInformation } from '$lib/format';
-import { getCropFromName, Crop } from 'farming-weight';
+import { getCropFromName, Crop, CROP_ID_TO_CROP, getProperCropFromCrop, getMinionFromCrop, getPestFromCrop } from 'farming-weight';
 import { getContext, setContext } from 'svelte';
 
 export class PlayerStats {
@@ -126,10 +124,10 @@ export class PlayerStats {
 
 	static parseCollections(member: NonNullable<components['schemas']['ProfileMemberDto']>) {
 		const collections = Object.entries(member.collections ?? {})
-			.filter(([key]) => PROPER_CROP_NAME[key])
+			.filter(([key]) => getProperCropFromCrop(getCropFromName(key) ?? Crop.Wheat))
 			.map(([key, value]) => ({
-				key: API_CROP_TO_CROP[key as keyof typeof API_CROP_TO_CROP],
-				name: PROPER_CROP_NAME[key],
+				key: CROP_ID_TO_CROP[key as keyof typeof CROP_ID_TO_CROP],
+				name: getProperCropFromCrop(getCropFromName(key) ?? Crop.Wheat),
 				value: value,
 				minionTierField: 0,
 				weight: 0,
@@ -141,8 +139,8 @@ export class PlayerStats {
 		for (const collection of collections) {
 			if (!collection.name) continue;
 
-			const minion = PROPER_CROP_TO_MINION[collection.name] ?? 'no';
-			const pest = CROP_TO_PEST[getCropFromName(collection.name) ?? Crop.Wheat];
+			const minion = getMinionFromCrop(getCropFromName(collection.name) ?? Crop.Wheat) ?? 'no';
+			const pest = getPestFromCrop(getCropFromName(collection.name) ?? Crop.Wheat);
 
 			collection.minionTierField = member.craftedMinions?.[minion] ?? 0;
 			collection.weight = member.farmingWeight?.cropWeight?.[collection.name] ?? 0;

@@ -1,8 +1,7 @@
 <script lang="ts">
 	import type { components } from '$lib/api/api';
-	import { getCropMilestones } from 'farming-weight';
+	import { Crop, getCropFromName, getCropMilestones } from 'farming-weight';
 	import MilestoneBar from './milestone-bar.svelte';
-	import { API_CROP_TO_CROP } from '$lib/constants/crops';
 
 	interface Props {
 		garden?: components['schemas']['GardenDto'] | undefined;
@@ -42,7 +41,7 @@
 	}
 
 	function getCropKey(crop: string) {
-		return API_CROP_TO_CROP[crop as keyof typeof API_CROP_TO_CROP];
+		return getCropFromName(crop) ?? Crop.Wheat;
 	}
 </script>
 

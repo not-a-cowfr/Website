@@ -17,8 +17,8 @@
 	import type { PageData } from './$types';
 	import { NumberInput } from '$comp/ui/number-input';
 	import type { components } from '$lib/api/api';
-	import { Crop, getCropDisplayName, getCropFromName, Pest } from 'farming-weight';
-	import { CROP_TO_ELITE_CROP, PROPER_CROP_TO_IMG } from '$lib/constants/crops';
+	import { Crop, getCropDisplayName, getCropFromName, getEliteCropFromCrop, Pest } from 'farming-weight';
+	import { PROPER_CROP_TO_IMG } from '$lib/constants/crops';
 	import HeroBanner from '$comp/hero-banner.svelte';
 	import { getFavoritesContext } from '$lib/stores/favorites.svelte';
 	import { page } from '$app/state';
@@ -223,7 +223,7 @@
 					{#each Object.entries(defaults?.cropWeights ?? {}) as [crop] (crop)}
 						{@const c = getCropFromName(crop) ?? Crop.Wheat}
 						{@const cropName = getCropDisplayName(c)}
-						{@const name = CROP_TO_ELITE_CROP[c]}
+						{@const name = getEliteCropFromCrop(c)}
 
 						<div class="flex flex-row items-center gap-1 px-4 md:basis-96">
 							<img src={PROPER_CROP_TO_IMG[cropName]} alt={crop} class="pixelated h-8 w-8" />
