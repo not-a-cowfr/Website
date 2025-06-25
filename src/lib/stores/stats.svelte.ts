@@ -1,7 +1,7 @@
 import type { components } from '$lib/api/api';
 import type { ProfileDetails } from '$lib/api/elite';
 import { formatIgn, getRankInformation } from '$lib/format';
-import { getCropFromName, Crop, CROP_ID_TO_CROP, getProperCropFromCrop, getMinionFromCrop, getPestFromCrop } from 'farming-weight';
+import { getCropFromName, Crop, getProperCropFromCrop, getMinionFromCrop, getPestFromCrop, getEliteCropFromCrop, getCropNameFromApiCrop } from 'farming-weight';
 import { getContext, setContext } from 'svelte';
 
 export class PlayerStats {
@@ -124,9 +124,9 @@ export class PlayerStats {
 
 	static parseCollections(member: NonNullable<components['schemas']['ProfileMemberDto']>) {
 		const collections = Object.entries(member.collections ?? {})
-			.filter(([key]) => getProperCropFromCrop(getCropFromName(key)!))
+			.filter(([key]) => getEliteCropFromCrop(getCropFromName(key)!))
 			.map(([key, value]) => ({
-				key: CROP_ID_TO_CROP[key as keyof typeof CROP_ID_TO_CROP],
+				key: getCropNameFromApiCrop(getCropFromName(key)!),
 				name: getProperCropFromCrop(getCropFromName(key)!),
 				value: value,
 				minionTierField: 0,
@@ -167,6 +167,7 @@ export function initStatsContext(opts: ConstructorParameters<typeof PlayerStats>
 
 export function getStatsContext() {
 	const stats = getContext<PlayerStats>('player-stats');
+    console.log(stats.collections.length);
 	if (!stats) {
 		throw new Error('Stats context not found');
 	}
